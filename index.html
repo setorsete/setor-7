@@ -3,7 +3,8 @@
   <base href="." />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GTA RP - Servidor</title>
+  <title>Setor 7 1.0</title>
+  <link rel="icon" type="image/png" href="myLogo.png">
   <style>
     * {
       margin: 0;
@@ -242,6 +243,110 @@
         font-size: 1em;
       }
     }
+
+    /* Modal Styles */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 2000;
+      backdrop-filter: blur(5px);
+    }
+
+    .modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #1a1a1a;
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 800px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+      z-index: 2001;
+    }
+
+    .modal-content {
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .modal-title {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #ff3b3b;
+    }
+
+    .close-button {
+      background: none;
+      border: none;
+      color: #ffffff;
+      font-size: 1.5em;
+      cursor: pointer;
+      padding: 5px;
+      transition: color 0.3s ease;
+    }
+
+    .close-button:hover {
+      color: #ff3b3b;
+    }
+
+    .rule-content {
+      margin: 20px 0;
+    }
+
+    .rule-navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-button {
+      background: #ff3b3b;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-button:hover {
+      background: #e63535;
+      transform: translateY(-2px);
+    }
+
+    .nav-button:disabled {
+      background: #666;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .rule-indicator {
+      text-align: center;
+      color: #fff;
+      margin: 0 20px;
+      font-size: 0.9em;
+    }
   </style>
 </head>
 <body>
@@ -276,11 +381,11 @@
       WhatsApp
     </a>
     <a href="https://cfx.re/join/d47zmq" class="action-button play-btn">
-        <svg class="icon" viewBox="0 0 24 24">
-          <path d="M8 5v14l11-7z"/>
-        </svg>
-        Jogar Agora
-      </a>
+      <svg class="icon" viewBox="0 0 24 24">
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+      Jogar Agora
+    </a>
   </div>
 
   <section class="copy-section">
@@ -296,5 +401,398 @@
 
     <p><span class="emoji">🕹️</span> Venha ser quem você sempre quis no <span class="highlight">Setor 7 RP</span>. O jogo está só começando...</p>
   </section>
+
+  <!-- Rules Modal -->
+  <div class="modal-overlay" id="rulesModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title">Regulamento do Servidor GTA RP - Setor 7</h2>
+        <button class="close-button" id="closeModal">×</button>
+      </div>
+      <div class="modal-content">
+        <div class="rule-content" id="ruleContent"></div>
+        <div class="rule-navigation">
+          <button class="nav-button" id="prevRule">
+            <svg class="icon" viewBox="0 0 24 24" width="24" height="24">
+              <path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+            </svg>
+            Anterior
+          </button>
+          <span class="rule-indicator" id="ruleIndicator">Regra 1 de 8</span>
+          <button class="nav-button" id="nextRule">
+            Próxima
+            <svg class="icon" viewBox="0 0 24 24" width="24" height="24">
+              <path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gameplay Modal -->
+  <div class="modal-overlay" id="gameplayModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title">Teclas de Interação - Setor 7</h2>
+        <button class="close-button" id="closeGameplayModal">×</button>
+      </div>
+      <div class="modal-content">
+        <div class="gameplay-content" id="gameplayContent"></div>
+        <div class="rule-navigation">
+          <button class="nav-button" id="prevGameplay">
+            <svg class="icon" viewBox="0 0 24 24" width="24" height="24">
+              <path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+            </svg>
+            Anterior
+          </button>
+          <span class="rule-indicator" id="gameplayIndicator">1 de 4</span>
+          <button class="nav-button" id="nextGameplay">
+            Próxima
+            <svg class="icon" viewBox="0 0 24 24" width="24" height="24">
+              <path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- How to Play Modal -->
+  <div class="modal-overlay" id="howToPlayModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title">Tutorial: Como Entrar no Servidor de GTA RP Setor 7</h2>
+        <button class="close-button" id="closeHowToPlayModal">×</button>
+      </div>
+      <div class="modal-content">
+        <div class="howtoplay-content" id="howToPlayContent"></div>
+        <div class="rule-navigation">
+          <button class="nav-button" id="prevHowToPlay">
+            <svg class="icon" viewBox="0 0 24 24" width="24" height="24">
+              <path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+            </svg>
+            Anterior
+          </button>
+          <span class="rule-indicator" id="howToPlayIndicator">1 de 6</span>
+          <button class="nav-button" id="nextHowToPlay">
+            Próxima
+            <svg class="icon" viewBox="0 0 24 24" width="24" height="24">
+              <path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Rules data
+    const rules = [
+      {
+        title: "1. Mantenha-se no Personagem",
+        content: "Você deve sempre estar dentro do seu personagem. Ao entrar no servidor, lembre-se de que tudo o que ocorre dentro do jogo faz parte da narrativa do seu personagem. Nunca saia do personagem durante o jogo. Se precisar fazer denúncias ou reclamações, utilize o suporte, mas nunca deixe de manter seu personagem em todas as interações."
+      },
+      {
+        title: "2. Criatividade e Liberdade de Ação",
+        content: "O servidor é um espaço livre para que você crie a história que deseja, seja um vendedor de água, um traficante de armas, ou qualquer outra profissão ou atividade. A única coisa que limita sua diversão é a sua criatividade. No entanto, é essencial que suas ações dentro do jogo façam sentido dentro da lógica da vida real e da narrativa do servidor."
+      },
+      {
+        title: "3. Não Aceitamos Comportamento Tóxico ou Preconceituoso",
+        content: "Respeite todos os jogadores. Não é permitido nenhum tipo de comportamento tóxico, preconceituoso ou discriminatório. A convivência dentro do Setor 7 deve ser amigável e respeitosa, e todos têm o direito de jogar sem ser alvo de ofensas ou atitudes negativas."
+      },
+      {
+        title: "4. Amor à Vida",
+        content: "A única regra que vale acima de todas é: o personagem NÃO pode ser diagnosticado como insano e não pode demonstrar falta de amor à vida. Isso significa que, mesmo que seu personagem tenha um comportamento arriscado ou se envolva em situações extremas, ele nunca deve agir sem considerar a preservação da vida, ou fazer coisas de forma suicida ou irracional."
+      },
+      {
+        title: "5. Criação e Expansão do Seu Personagem",
+        content: "Você é livre para criar o que quiser, desde que siga as regras. Você pode abrir fábricas, lojas ou até mesmo criar negócios ilegais ou legais. Para isso, basta procurar o suporte no Discord e apresentar suas ideias para o seu personagem. Não há limites para o que você pode alcançar, desde que esteja dentro do bom senso e da narrativa do servidor."
+      },
+      {
+        title: "6. Suporte",
+        content: "O suporte está disponível para resolver problemas relacionados a bugs, dúvidas ou reclamações sobre outros jogadores. Não use o suporte para pedir a reviver seu personagem após um acidente ou outras situações dentro do jogo. Caso tenha ideias para o seu personagem ou negócios, entre em contato com a administração pelo Discord."
+      },
+      {
+        title: "7. Denúncias e Reclamações",
+        content: "Para qualquer problema com outros jogadores ou situações que infringem as regras, faça suas denúncias e reclamações através do suporte. Nunca saia do personagem ou quebre a narrativa para resolver disputas no jogo."
+      },
+      {
+        title: "8. Responsabilidade e Bom Senso",
+        content: "Cada jogador é responsável pelas ações do seu personagem, mas sempre dentro de um contexto lógico e com bom senso. Evite situações que quebrem a imersão do servidor e que possam prejudicar a experiência de outros jogadores."
+      }
+    ];
+
+    // Gameplay data
+    const gameplay = [
+      {
+        title: "1. Menu Radial: Tecla F1",
+        content: `
+          <p><strong>Tecla para abrir o menu radial:</strong> Pressione F1 para acessar o menu radial e interagir com NPCs, veículos e objetos.</p>
+          <p><strong>Funções do Menu Radial (F1):</strong></p>
+          <ul>
+            <li>Conversar com NPCs ou outros jogadores.</li>
+            <li>Abrir ou fechar veículos.</li>
+            <li>Iniciar atividades baseadas na profissão (vender, comprar, etc.).</li>
+          </ul>
+        `
+      },
+      {
+        title: "2. Liberação do Mouse para Menus Automáticos (Tecla Alt)",
+        content: `
+          <p><strong>Tecla para liberar o mouse:</strong> Segure Alt para liberar o mouse, permitindo interagir com menus automáticos e objetos de forma intuitiva.</p>
+          <p><strong>Funções do Alt:</strong></p>
+          <ul>
+            <li>Ao pressionar Alt, você pode interagir com objetos e NPCs sem precisar usar o teclado.</li>
+            <li>Segure Alt para usar o "olho" e interagir de forma mais detalhada.</li>
+          </ul>
+        `
+      },
+      {
+        title: "3. Teclas Específicas de Interação",
+        content: `
+          <p><strong>Telefone (Tecla M):</strong></p>
+          <ul>
+            <li>Realizar chamadas para outros jogadores</li>
+            <li>Enviar e receber mensagens de texto</li>
+            <li>Acessar contatos ou números para chamadas</li>
+          </ul>
+          <p><strong>Abrir Inventário (Tecla TAB):</strong></p>
+          <ul>
+            <li>Organizar, usar e visualizar seus itens</li>
+            <li>Vender ou trocar itens com outros jogadores</li>
+            <li>Acessar seus recursos como dinheiro, produtos, armas, etc.</li>
+          </ul>
+          <p><strong>Trancar/Destrancar Veículo (Tecla L):</strong></p>
+          <ul>
+            <li>Trancar o carro para garantir que outros jogadores não acessem seu veículo</li>
+            <li>Destrancar o carro para permitir acesso ao veículo</li>
+          </ul>
+        `
+      },
+      {
+        title: "4. Exploração e Descoberta",
+        content: `
+          <p>O servidor Setor 7 incentiva a exploração! Ao se aproximar de NPCs e objetos, você poderá descobrir novas interações, e as teclas correspondentes serão mostradas automaticamente na tela, permitindo uma experiência fluída e interativa.</p>
+          <p>Diversas interações têm teclas atribuídas e aparecerão na tela conforme você se aproxima de objetos ou NPCs. As teclas de ação serão visíveis e você poderá decidir o que fazer dependendo do ambiente.</p>
+        `
+      }
+    ];
+
+    // How to Play data
+    const howToPlay = [
+      {
+        title: "Passo 1: Acessar o Discord do Servidor",
+        content: `
+          <p>Entre no servidor Discord do Setor 7:</p>
+          <ul>
+            <li>Se você ainda não tem o link do Discord, <a href="https://discord.gg/bXQS5btYkg" class="highlight">clique aqui</a> para entrar automaticamente no servidor.</li>
+            <li>Acesse o canal "Connect Fivem" no Discord.</li>
+            <li>O canal estará disponível para todos os jogadores que desejam acessar o servidor de roleplay no FiveM.</li>
+          </ul>
+        `
+      },
+      {
+        title: "Passo 2: Conectar ao Servidor FiveM",
+        content: `
+          <p>Para se conectar ao servidor:</p>
+          <ul>
+            <li>Clique em "Connectar no FiveM" dentro do canal "Connect Fivem".</li>
+            <li>Este botão abrirá o FiveM e permitirá que você entre automaticamente no servidor Setor 7.</li>
+            <li>Abra o servidor no FiveM. Uma vez dentro, você será direcionado para o processo de criação de personagem.</li>
+          </ul>
+        `
+      },
+      {
+        title: "Passo 3: Criar Seu Personagem",
+        content: `
+          <ul>
+            <li>No FiveM, você será solicitado a criar seu personagem.</li>
+            <li>Preencha os detalhes do personagem, como nome, aparência e outros atributos, conforme solicitado pelo jogo.</li>
+            <li>Finalize a criação do seu personagem e continue o processo até ser inserido no jogo.</li>
+          </ul>
+        `
+      },
+      {
+        title: "Passo 4: Liberar o ID do Personagem no Discord",
+        content: `
+          <p>Após criar seu personagem:</p>
+          <ul>
+            <li>Olhe na tela para encontrar o Citizen ID (ID do personagem).</li>
+            <li>O Citizen ID será exibido na tela ao lado do nome do personagem.</li>
+            <li>Vá até o canal "Liberar Personagem" no Discord.</li>
+            <li>Copie o Citizen ID que apareceu no FiveM e cole-o no campo correspondente.</li>
+            <li>Clique em "Liberar" depois de colar o ID.</li>
+          </ul>
+        `
+      },
+      {
+        title: "Passo 5: Confirmar a Liberação no FiveM",
+        content: `
+          <ul>
+            <li>Volte para o FiveM.</li>
+            <li>Aguarde até que o processo de verificação seja concluído.</li>
+            <li>Clique em "Já Liberei" dentro do jogo para confirmar que você completou o processo.</li>
+            <li>Após confirmar, seu personagem estará completamente registrado no servidor!</li>
+          </ul>
+        `
+      },
+      {
+        title: "Passo 6: Comece a Jogar!",
+        content: `
+          <p>Agora que a criação do personagem e a liberação do ID foram completadas, você está pronto para iniciar a aventura no Setor 7!</p>
+          <p><strong>Dicas Importantes:</strong></p>
+          <ul>
+            <li>Se você tiver problemas técnicos durante o processo, abra um suporte no Discord para obter ajuda.</li>
+            <li>Lembre-se de seguir todas as regras do servidor, como não sair do personagem, e mantenha a boa conduta durante o roleplay.</li>
+          </ul>
+        `
+      }
+    ];
+
+    // Modal functionality
+    let currentRule = 0;
+
+    document.querySelector('a[href="#"].nav-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('rulesModal').style.display = 'block';
+      showRule(currentRule);
+    });
+
+    document.getElementById('closeModal').addEventListener('click', () => {
+      document.getElementById('rulesModal').style.display = 'none';
+    });
+
+    document.getElementById('prevRule').addEventListener('click', () => {
+      if (currentRule > 0) {
+        showRule(--currentRule);
+      }
+    });
+
+    document.getElementById('nextRule').addEventListener('click', () => {
+      if (currentRule < rules.length - 1) {
+        showRule(++currentRule);
+      }
+    });
+
+    function showRule(index) {
+      const ruleContent = document.getElementById('ruleContent');
+      const prevButton = document.getElementById('prevRule');
+      const nextButton = document.getElementById('nextRule');
+      const indicator = document.getElementById('ruleIndicator');
+
+      ruleContent.innerHTML = `
+        <h3>${rules[index].title}</h3>
+        <p>${rules[index].content}</p>
+      `;
+
+      prevButton.disabled = index === 0;
+      nextButton.disabled = index === rules.length - 1;
+      indicator.textContent = `Regra ${index + 1} de ${rules.length}`;
+    }
+
+    // Close modal when clicking outside
+    window.addEventListener('click', (e) => {
+      if (e.target === document.getElementById('rulesModal')) {
+        document.getElementById('rulesModal').style.display = 'none';
+      }
+    });
+
+    let currentGameplay = 0;
+
+    // Add click handler for gameplay link
+    document.querySelectorAll('.nav-link')[1].addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('gameplayModal').style.display = 'block';
+      showGameplay(currentGameplay);
+    });
+
+    document.getElementById('closeGameplayModal').addEventListener('click', () => {
+      document.getElementById('gameplayModal').style.display = 'none';
+    });
+
+    document.getElementById('prevGameplay').addEventListener('click', () => {
+      if (currentGameplay > 0) {
+        showGameplay(--currentGameplay);
+      }
+    });
+
+    document.getElementById('nextGameplay').addEventListener('click', () => {
+      if (currentGameplay < gameplay.length - 1) {
+        showGameplay(++currentGameplay);
+      }
+    });
+
+    function showGameplay(index) {
+      const gameplayContent = document.getElementById('gameplayContent');
+      const prevButton = document.getElementById('prevGameplay');
+      const nextButton = document.getElementById('nextGameplay');
+      const indicator = document.getElementById('gameplayIndicator');
+
+      gameplayContent.innerHTML = `
+        <h3>${gameplay[index].title}</h3>
+        ${gameplay[index].content}
+      `;
+
+      prevButton.disabled = index === 0;
+      nextButton.disabled = index === gameplay.length - 1;
+      indicator.textContent = `${index + 1} de ${gameplay.length}`;
+    }
+
+    // Close gameplay modal when clicking outside
+    window.addEventListener('click', (e) => {
+      if (e.target === document.getElementById('gameplayModal')) {
+        document.getElementById('gameplayModal').style.display = 'none';
+      }
+    });
+
+    let currentHowToPlay = 0;
+
+    // Add click handler for how to play link
+    document.querySelectorAll('.nav-link')[2].addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('howToPlayModal').style.display = 'block';
+      showHowToPlay(currentHowToPlay);
+    });
+
+    document.getElementById('closeHowToPlayModal').addEventListener('click', () => {
+      document.getElementById('howToPlayModal').style.display = 'none';
+    });
+
+    document.getElementById('prevHowToPlay').addEventListener('click', () => {
+      if (currentHowToPlay > 0) {
+        showHowToPlay(--currentHowToPlay);
+      }
+    });
+
+    document.getElementById('nextHowToPlay').addEventListener('click', () => {
+      if (currentHowToPlay < howToPlay.length - 1) {
+        showHowToPlay(++currentHowToPlay);
+      }
+    });
+
+    function showHowToPlay(index) {
+      const howToPlayContent = document.getElementById('howToPlayContent');
+      const prevButton = document.getElementById('prevHowToPlay');
+      const nextButton = document.getElementById('nextHowToPlay');
+      const indicator = document.getElementById('howToPlayIndicator');
+
+      howToPlayContent.innerHTML = `
+        <h3>${howToPlay[index].title}</h3>
+        ${howToPlay[index].content}
+      `;
+
+      prevButton.disabled = index === 0;
+      nextButton.disabled = index === howToPlay.length - 1;
+      indicator.textContent = `${index + 1} de ${howToPlay.length}`;
+    }
+
+    // Close how to play modal when clicking outside
+    window.addEventListener('click', (e) => {
+      if (e.target === document.getElementById('howToPlayModal')) {
+        document.getElementById('howToPlayModal').style.display = 'none';
+      }
+    });
+  </script>
 </body>
 </html>
