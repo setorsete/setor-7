@@ -1,249 +1,238 @@
-<html>
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-  <base href="." />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Setor 7 1.0</title>
   <link rel="icon" type="image/png" href="myLogo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --color-primary: #FF8C00;
+      --color-primary-light: #FFB347;
+      --color-background-dark: #0D0D0D;
+      --color-background-light: #1A1A1A;
+      --color-text: #F5F5F5;
+      --color-text-muted: #B0B0B0;
+      --font-main: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Arial', sans-serif;
     }
-
     body {
-      background-color: #1a1a1a;
-      color: #ffffff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      font-family: var(--font-main);
+      background-color: var(--color-background-dark);
+      color: var(--color-text);
+      line-height: 1.6;
+      overflow-x: hidden;
     }
-
-    .nav-menu {
-      background: rgba(0, 0, 0, 0.8);
-      padding: 15px 0;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      backdrop-filter: blur(10px);
-    }
-
-    .nav-container {
+    .container {
       max-width: 1200px;
       margin: 0 auto;
-      display: flex;
-      justify-content: flex-end;
       padding: 0 20px;
     }
-
-    .nav-links {
+    header {
       display: flex;
-      gap: 30px;
-    }
-
-    .nav-link {
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 1.1em;
-      font-weight: 500;
-      padding: 5px 15px;
-      border-radius: 4px;
-      transition: all 0.3s ease;
-    }
-
-    .nav-link:hover {
-      background: rgba(0, 123, 255, 0.2);
-      color: #007bff;
-    }
-
-    .header {
-      width: 100%;
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-    }
-
-    .logo-placeholder {
-      text-align: center;
-    }
-
-    .logo-image {
-      max-width: 300px;
-      height: auto;
-      margin: 0 auto;
-      display: block;
-    }
-
-    .tagline {
-      text-align: center;
-      font-size: 1.5em;
-      margin-top: 20px;
-      color: #ffffff;
-      font-weight: 300;
-      line-height: 1.4;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-      padding: 0 20px;
-      animation: fadeIn 1.5s ease-out;
-    }
-
-    .action-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-      padding: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .action-button {
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(245, 245, 245, 0.1);
       position: relative;
-      width: 280px;
-      padding: 20px 40px;
-      border: none;
-      border-radius: 8px;
-      font-size: 1.2em;
-      font-weight: bold;
+    }
+    .logo img {
+      height: 50px;
+      width: auto;
+      vertical-align: middle;
+    }
+    .logo-text {
+      font-size: 1.8em;
+      font-weight: 900;
+      color: var(--color-text);
       text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-decoration: none;
+      letter-spacing: 1px;
+      vertical-align: middle;
+    }
+    .logo-text .vice { color: var(--color-primary); }
+    .logo-text .online { color: var(--color-text); }
+    .logo-text .rp { font-size: 0.7em; opacity: 0.8; }
+    nav ul {
+      list-style: none;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
+      gap: 30px;
     }
-
-    .discord-btn {
-      background: #5865F2;
-      color: white;
-      box-shadow: 0 0 15px rgba(88, 101, 242, 0.5);
+    nav a {
+      text-decoration: none;
+      color: var(--color-text-muted);
+      font-weight: 700;
+      font-size: 1em;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+      padding: 5px 0;
     }
-
-    .discord-btn:hover {
-      background: #4752C4;
-      box-shadow: 0 0 25px rgba(88, 101, 242, 0.8);
-      transform: translateY(-2px);
+    nav a:hover, nav a.active-link {
+      color: var(--color-primary);
+      text-shadow: 0 0 8px var(--color-primary);
     }
-
-    .whatsapp-btn {
-      background: #25D366;
-      color: white;
-      box-shadow: 0 0 15px rgba(37, 211, 102, 0.5);
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--color-text);
+      font-size: 2.2em;
+      cursor: pointer;
+      line-height: 1;
+      padding: 5px;
     }
-
-    .whatsapp-btn:hover {
-      background: #1FB959;
-      box-shadow: 0 0 25px rgba(37, 211, 102, 0.8);
-      transform: translateY(-2px);
+    .hero {
+      text-align: center;
+      padding: 70px 20px 80px 20px;
+      background-color: var(--color-background-light);
+      border-radius: 0 0 20px 20px;
+      margin-bottom: 50px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
-
-    .play-btn {
-      background: #FF3B3B;
-      color: white;
-      box-shadow: 0 0 15px rgba(255, 59, 59, 0.5);
+    .hero h1 {
+      font-size: 3.2em;
+      font-weight: 900;
+      margin-bottom: 25px;
+      line-height: 1.2;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light), var(--color-primary));
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: textGradient 5s linear infinite;
     }
-
-    .play-btn:hover {
-      background: #E63535;
-      box-shadow: 0 0 25px rgba(255, 59, 59, 0.8);
-      transform: translateY(-2px);
-    }
-
-    .icon {
-      width: 24px;
-      height: 24px;
-      fill: currentColor;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
+    @keyframes textGradient {
       to {
-        opacity: 1;
-        transform: translateY(0);
+        background-position: 200% center;
       }
     }
-
-    @media (max-width: 768px) {
-      .nav-container {
-        justify-content: center;
-      }
-      
-      .nav-links {
-        gap: 15px;
-      }
-      
-      .nav-link {
-        font-size: 0.9em;
-        padding: 5px 10px;
-      }
-      
-      .action-buttons {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-      }
-      
-      .action-button {
-        width: 90%;
-      }
-
-      .header {
-        margin: 20px auto;
-      }
+    .hero p {
+      font-size: 1.25em;
+      color: var(--color-text-muted);
+      margin-bottom: 40px;
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
     }
-
+    .main-cta {
+      background-image: linear-gradient(to right, var(--color-primary) 0%, var(--color-primary-light) 50%, var(--color-primary) 100%);
+      display: inline-block;
+      padding: 16px 32px;
+      text-decoration: none;
+      color: #fff;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1.15em;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      transition: transform 0.2s ease, box-shadow 0.3s ease, background-position 0.5s ease;
+      border: none;
+      cursor: pointer;
+      background-size: 250% auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      margin-bottom: 20px;
+    }
+    .main-cta:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+      background-position: right center;
+    }
+    .main-cta:active {
+      transform: translateY(-1px) scale(1);
+    }
+    .social-links {
+      text-align: center;
+      padding: 40px 20px 0 20px;
+    }
+    .social-links h2 {
+      font-size: 2.2em;
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: 35px;
+      text-transform: uppercase;
+    }
+    .social-links h2::after {
+      content: '';
+      display: block;
+      width: 70px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+      margin: 12px auto 0;
+      border-radius: 2px;
+    }
+    .buttons-group {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .discord-button,
+    .whatsapp-button {
+      background-image: linear-gradient(to right, var(--color-primary) 0%, var(--color-primary-light) 50%, var(--color-primary) 100%);
+      color: #fff;
+    }
+    .cta-button {
+      display: inline-block;
+      padding: 16px 32px;
+      text-decoration: none;
+      color: #fff;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1.15em;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      transition: transform 0.2s ease, box-shadow 0.3s ease, background-position 0.5s ease;
+      border: none;
+      cursor: pointer;
+      background-size: 250% auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      margin-bottom: 0;
+    }
+    .cta-button:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+      background-position: right center;
+    }
+    .cta-button:active {
+      transform: translateY(-1px) scale(1);
+    }
+    footer {
+      text-align: center;
+      padding: 35px 20px;
+      margin-top: 50px;
+      border-top: 1px solid rgba(245, 245, 245, 0.1);
+      font-size: 0.9em;
+      color: var(--color-text-muted);
+    }
     .copy-section {
       max-width: 1000px;
       margin: 50px auto;
       padding: 30px;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(26, 26, 26, 0.85);
       border-radius: 15px;
       text-align: center;
       line-height: 1.6;
-      animation: fadeIn 1s ease-out;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     }
-
     .copy-section p {
       margin: 20px 0;
       font-size: 1.1em;
-      color: #f0f0f0;
+      color: #f5f5f5;
     }
-
     .copy-section strong {
-      color: #ff3b3b;
+      color: var(--color-primary);
       font-size: 1.3em;
     }
-
     .emoji {
       font-size: 1.4em;
     }
-
     .highlight {
-      color: #ff3b3b;
+      color: var(--color-primary);
       font-weight: bold;
     }
-
-    @media (max-width: 768px) {
-      .copy-section {
-        margin: 30px 15px;
-        padding: 20px;
-      }
-
-      .copy-section p {
-        font-size: 1em;
-      }
-    }
-
     /* Modal Styles */
     .modal-overlay {
       display: none;
@@ -256,7 +245,6 @@
       z-index: 2000;
       backdrop-filter: blur(5px);
     }
-
     .modal {
       position: fixed;
       top: 50%;
@@ -272,25 +260,21 @@
       box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
       z-index: 2001;
     }
-
     .modal-content {
       color: #ffffff;
       line-height: 1.6;
     }
-
     .modal-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 20px;
     }
-
     .modal-title {
       font-size: 1.5em;
       font-weight: bold;
-      color: #ff3b3b;
+      color: var(--color-primary);
     }
-
     .close-button {
       background: none;
       border: none;
@@ -300,157 +284,203 @@
       padding: 5px;
       transition: color 0.3s ease;
     }
-
     .close-button:hover {
-      color: #ff3b3b;
+      color: var(--color-primary);
     }
-
-    .rule-content {
-      margin: 20px 0;
+    @media (max-width: 768px) {
+      .logo img { height: 40px; }
+      .logo-text { font-size: 1.4em; }
+      nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--color-background-light);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        padding: 10px 0;
+        z-index: 1000;
+        border-top: 1px solid rgba(245, 245, 245, 0.1);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      }
+      nav ul.active {
+        display: flex;
+      }
+      nav li {
+        width: 100%;
+        text-align: center;
+      }
+      nav li:not(:last-child) {
+        margin-bottom: 5px;
+      }
+      nav a {
+        display: block;
+        padding: 12px 20px;
+        font-size: 1.1em;
+      }
+      nav a:hover {
+        background-color: rgba(255, 140, 0, 0.1);
+        color: var(--color-primary);
+        text-shadow: none;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .hero h1 {
+        font-size: 2.6em;
+      }
+      .hero p {
+        font-size: 1.1em;
+      }
+      .cta-button {
+        padding: 15px 28px;
+        font-size: 1.05em;
+        width: 100%;
+        max-width: 320px;
+      }
+      .main-cta { margin-bottom: 20px; }
+      .buttons-group {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+      .buttons-group .cta-button {
+        width: 100%;
+        max-width: 320px;
+      }
+      .social-links h2 {
+        font-size: 1.9em;
+      }
+      .copy-section {
+        margin: 30px 15px;
+        padding: 20px;
+      }
+      .copy-section p {
+        font-size: 1em;
+      }
     }
-
-    .rule-navigation {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    @media (max-width: 480px) {
+      .hero { padding: 50px 15px 60px 15px; }
+      .hero h1 {
+        font-size: 2.1em;
+      }
+      .hero p {
+        font-size: 1em;
+      }
+      .container { padding: 0 15px; }
+      header { padding: 15px 0; }
+      .logo img { height: 35px; }
+      .logo-text { font-size: 1.2em; }
+      .social-links h2 {
+        font-size: 1.6em;
+      }
     }
-
-    .nav-button {
-      background: #ff3b3b;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: all 0.3s ease;
+    .feature-btn {
+      background: #0D0D0D !important;
+      color: #F5F5F5 !important;
+      border: 2px solid #F5F5F5 !important;
+      box-shadow: none !important;
+      transition: background 0.2s, color 0.2s, border 0.2s;
     }
-
-    .nav-button:hover {
-      background: #e63535;
-      transform: translateY(-2px);
-    }
-
-    .nav-button:disabled {
-      background: #666;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .rule-indicator {
-      text-align: center;
-      color: #fff;
-      margin: 0 20px;
-      font-size: 0.9em;
+    .feature-btn:hover, .feature-btn:focus {
+      background: rgba(245,245,245,0.08) !important;
+      color: #FF8C00 !important;
+      border-color: #FF8C00 !important;
     }
   </style>
 </head>
 <body>
-  <nav class="nav-menu">
-    <div class="nav-container">
-      <div class="nav-links">
-        <a href="#" class="nav-link" id="viewRules">Regras</a>
-        <a href="#" class="nav-link">Jogabilidade</a>
-        <a href="#" class="nav-link">Como Jogar</a>
-      </div>
-    </div>
-  </nav>
+  <div class="container">
+    <header>
+      <a href="#" class="logo" aria-label="Homepage">
+        <img src="https://i.ibb.co/HfJHmK1L/logo.png" alt="Setor 7 Logo" id="logoImage">
+        <span class="logo-text" id="logoTextFallback" style="display:none;">
+          <span class="vice">Setor</span> <span class="online">7</span> <span class="rp">RP</span>
+        </span>
+      </a>
+      <nav id="main-nav">
+        <ul>
+          <li><a href="#" class="nav-link" id="viewRules">Regras</a></li>
+          <li><a href="#" class="nav-link" id="viewGameplay">Como Entrar no Setor 7</a></li>
+        </ul>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle-button" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-nav-ul">☰</button>
+    </header>
+    <main>
+      <section class="hero">
+        <h1>Você está prestes a criar a maior história de todos os tempos, viva isso agora!</h1>
+        <p>Setor 7 RP não é só um servidor. É liberdade total no roleplay!
+Aqui, você não paga por vantagem. Tudo é conquistado com estratégia, atitude e boas ideias.
 
-  <header class="header">
-    <div class="logo-placeholder">
-      <img src="https://i.ibb.co/HfJHmK1L/logo.png" alt="Server Logo" class="logo-image">
-      <p class="tagline">Você está prestes a criar a maior história de todos os tempos, viva isso agora!</p>
-    </div>
-  </header>
+No legal ou ilegal, você decide: controle um QG como a Sintonia Final ou proponha projetos na Prefeitura. A staff apoia, mas quem cria a história é você.
 
-  <div class="action-buttons">
-    <a href="https://discord.gg/bXQS5btYkg" class="action-button discord-btn">
-      <svg class="icon" viewBox="0 0 24 24">
-        <path d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08-.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.17.33.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12z"/>
-      </svg>
-      Discord
-    </a>
-    <a href="https://chat.whatsapp.com/JieYhf8SPIvLwbJ8BbdQYz" class="action-button whatsapp-btn">
-      <svg class="icon" viewBox="0 0 24 24">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-      </svg>
-      WhatsApp
-    </a>
-    <a href="https://cfx.re/join/d47zmq" class="action-button play-btn">
-      <svg class="icon" viewBox="0 0 24 24">
-        <path d="M8 5v14l11-7z"/>
-      </svg>
-      Jogar Agora
-    </a>
+💥 Não perde tempo! Faz a whitelist e clica em "JOGAR AGORA"!</p>
+        <a href="https://cfx.re/join/d47zmq" class="cta-button main-cta" target="_blank" rel="noopener noreferrer">Jogar Agora</a>
+      </section>
+      <section class="social-links">
+        <h2>Conecte-se Conosco</h2>
+        <div class="buttons-group">
+          <a href="https://discord.gg/hsf8FUf8Ga" class="cta-button discord-button" target="_blank" rel="noopener noreferrer">Entrar no Discord</a>
+          <a href="https://chat.whatsapp.com/JieYhf8SPIvLwbJ8BbdQYz" class="cta-button whatsapp-button" target="_blank" rel="noopener noreferrer">Grupo WhatsApp</a>
+        </div>
+      </section>
+      <section class="copy-section" style="text-align:center; border-radius:18px;">
+        <h1 style="margin-bottom:18px;">Descubra o Setor 7 RP</h1>
+        <p style="margin-bottom:18px; font-size:1.08em; color:var(--color-text-muted); border-radius:12px; background:rgba(30,30,30,0.7); padding:14px 18px; display:inline-block; max-width:700px;">O Setor 7 RP é um servidor fechado, feito para gerar o máximo de roleplay. Tudo foi pensado para ser funcional, leve e inovador. Aqui, quem conquista, domina. Não existe conversa com admin: o controle é seu e dos seus aliados. Sistemas de roubos, fabricação, lojas, veículos e facções são completos e práticos. O ilegal é fácil de lidar, o legal é dinâmico, e tudo pode ser conquistado dentro do RP.</p>
+        <div class="feature-buttons" style="display:flex; flex-wrap:wrap; justify-content:center; gap:14px; margin-bottom:18px;">
+          <button class="cta-button feature-btn" style="min-width:120px;" onclick="showFeature('ilegal')">Ilegal</button>
+          <button class="cta-button feature-btn" style="min-width:120px;" onclick="showFeature('legal')">Legal</button>
+          <button class="cta-button feature-btn" style="min-width:120px;" onclick="showFeature('faccoes')">Facções</button>
+          <button class="cta-button feature-btn" style="min-width:120px;" onclick="showFeature('sistemas')">Sistemas</button>
+          <button class="cta-button feature-btn" style="min-width:120px;" onclick="showFeature('loja')">Loja</button>
+          <button class="cta-button feature-btn" style="min-width:120px;" onclick="showFeature('veiculos')">Veículos</button>
+          <button class="cta-button feature-btn" style="min-width:120px;" onclick="showFeature('inovacao')">Inovação</button>
+        </div>
+        <p style="margin-bottom:0; font-size:1.08em; color:var(--color-text-muted); border-radius:12px; background:rgba(30,30,30,0.7); padding:14px 18px; display:inline-block; max-width:700px;">Tudo no Setor 7 RP foi criado para que você viva o melhor do roleplay, com sistemas únicos e liberdade total para crescer, dominar e inovar.</p>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2025 Setor 7 RP. Todos os direitos reservados.</p>
+    </footer>
   </div>
-
-  <section class="copy-section">
-    <h1>🚀 <strong>Descubra o Diferencial do Setor 7 RP</strong></h1>
-
-    <h2>🎮 <strong>O Roleplay Como Deve Ser</strong></h2>
-    <p>O Setor 7 RP <strong>não é apenas mais um servidor de RP</strong>, ele é uma revolução na forma de jogar! Aqui, você não paga por vantagens injustas. <strong>Não vendemos carros blindados, não vendemos helicópteros, mansões ou organizações.</strong> Tudo o que você conquista é <strong>dentro do roleplay</strong>, através das suas ações e da sua história.</p>
-
-    <p>Diferente de outros servidores que transformam o RP em um "pague para vencer", no Setor 7 <strong>todo jogador começa do zero, de forma justa e equilibrada</strong>, com liberdade total para criar sua jornada, seu império e sua identidade no jogo.</p>
-
-    <p>Além disso, <strong>tudo o que normalmente seria VIP em outros servidores pode ser conquistado dentro do Setor 7 RP</strong>. Carros exclusivos, mansões luxuosas, helicópteros, fábricas, empresas, organizações... Tudo isso está disponível <strong>para ser comprado e conquistado dentro do RP, sem precisar gastar dinheiro real</strong>.</p>
-
-    <p>Outro grande diferencial do Setor 7 RP é que <strong>nunca haverá reset de personagem!</strong> Sua evolução, suas conquistas e sua história serão preservadas. O servidor está em constante evolução, sempre trazendo <strong>novas missões, trabalhos e funções exclusivas</strong> para manter o jogo dinâmico e envolvente.</p>
-
-    <hr>
-
-    <h2>🏆 <strong>Liberdade Para Criar o Que Quiser</strong></h2>
-    <p>Ao assinar o Setor 7 RP, você <strong>não está comprando itens ou vantagens</strong>. Você está investindo na <strong>sua liberdade de criar</strong>:</p>
-    <ul>
-      <li>✅ Criar novas organizações (gangues, corporações, empresas);</li>
-      <li>✅ Se tornar dono de lojas, fábricas e estabelecimentos;</li>
-      <li>✅ Desenvolver seu próprio enredo, seja um empresário milionário ou um criminoso em ascensão;</li>
-      <li>✅ Adquirir casas, carros e propriedades dentro do RP, <strong>sem precisar gastar dinheiro real</strong>.</li>
-    </ul>
-    <p>Aqui, <strong>você tem controle total sobre o seu destino</strong>, sem precisar competir contra quem simplesmente "comprou tudo".</p>
-
-    <hr>
-
-    <h2>💰 <strong>Um Valor Acessível Para Um RP Justo</strong></h2>
-    <p>O Setor 7 RP funciona com um sistema de assinatura acessível. Você pode escolher entre planos de:</p>
-    <ul>
-      <li><strong>Mensal</strong></li>
-      <li><strong>Bimestral (60 dias)</strong></li>
-      <li><strong>Trimestral (90 dias)</strong></li>
-      <li><strong>Anual</strong></li>
-    </ul>
-    <p>O valor é <strong>insignificante</strong> perto da experiência que você terá! <strong>Em vez de gastar dinheiro comprando itens e vantagens como em outros servidores, aqui você paga apenas para fazer parte de um RP justo, equilibrado e verdadeiramente imersivo.</strong></p>
-
-    <hr>
-
-    <h2>⚖️ <strong>Por Que o Setor 7 RP é Diferente?</strong></h2>
-    <ul>
-      <li>🚫 <strong>Nada de Pay-to-Win</strong> – Todos começam no mesmo nível, sem vantagens injustas;</li>
-      <li>🎭 <strong>Histórias Ricas e Imersivas</strong> – A liberdade para criar sua trajetória sem limitações;</li>
-      <li>🏡 <strong>Propriedades e Veículos São Conquistados</strong> – Você pode crescer e prosperar sem precisar gastar dinheiro real;</li>
-      <li>🔑 <strong>Tudo que seria VIP em outros servidores pode ser comprado dentro do RP</strong>;</li>
-      <li>📜 <strong>Regras Equilibradas e Justas</strong> – Mantemos o RP sério e livre de abusos;</li>
-      <li>🔄 <strong>Sem Reset de Personagem</strong> – Sua história e progresso são permanentes;</li>
-      <li>🚀 <strong>Atualizações Constantes</strong> – Sempre trazendo novas missões, trabalhos e funções exclusivas.</li>
-    </ul>
-    <p><strong>O Setor 7 RP é o servidor para quem realmente ama roleplay!</strong></p>
-
-    <hr>
-
-    <h2>🔥 <strong>Junte-se Agora!</strong></h2>
-    <p>Se você está cansado de servidores que vendem vantagens e quebram a imersão do roleplay, <strong>o Setor 7 RP é o lugar certo para você</strong>. Assine agora e faça parte do RP mais justo e emocionante que você já viu!</p>
-  </section>
-
   <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle-button');
+    const mainNavUl = document.getElementById('main-nav').querySelector('ul');
+    mainNavUl.id = 'main-nav-ul';
+    menuToggle.addEventListener('click', () => {
+      const isOpen = mainNavUl.classList.toggle('active');
+      menuToggle.setAttribute('aria-expanded', isOpen);
+      menuToggle.innerHTML = isOpen ? '&times;' : '☰';
+    });
+    // Logo fallback
+    const logoImage = document.getElementById('logoImage');
+    const logoTextFallback = document.getElementById('logoTextFallback');
+    if (logoImage) {
+      logoImage.onerror = function() {
+        logoImage.style.display = 'none';
+        if(logoTextFallback) logoTextFallback.style.display = 'inline-block';
+      };
+    } else if (logoTextFallback) {
+      logoTextFallback.style.display = 'inline-block';
+    }
+    // Close mobile menu on link click
+    mainNavUl.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (mainNavUl.classList.contains('active')) {
+          mainNavUl.classList.remove('active');
+          menuToggle.setAttribute('aria-expanded', 'false');
+          menuToggle.innerHTML = '☰';
+        }
+      });
+    });
+    // Modals (mantém as funcionalidades originais)
     document.getElementById('viewRules').addEventListener('click', (e) => {
       e.preventDefault();
       const rulesContent = `
         <h1>📜 Regras do Setor 7 RP</h1>
         <h2>🎭 Objetivo do Servidor</h2>
-        <p>Nosso servidor é focado na criação de histórias envolventes e na livre expressão de criatividade dentro das diretrizes do roleplay. Queremos um ambiente rico em detalhes, onde cada jogador possa contribuir para um mundo imersivo e realista. Nenhum jogador é obrigado a comprar itens dentro do servidor; todos os bens (carros, mansões, helicópteros etc.) são adquiridos dentro do roleplay.</p>
+        <p>Nosso servidor é focado na criação de histórias envolventes e na livre expressão de criatividade dentro das diretrizes do roleplay. Queremos um ambiente rico em detalhes, onde cada jogador possa contribuir para um mundo imersivo e realista.</p>
         <p>A principal regra do <strong>Setor 7 RP</strong> é: <strong>Mantenha-se sempre no personagem!</strong> Em nenhuma situação um jogador pode sair do seu papel ou trazer informações externas para influenciar a narrativa.</p>
         <hr>
         <h2>⚖️ Regras Gerais</h2>
@@ -570,31 +600,21 @@
       `;
       document.body.appendChild(modal);
       modal.style.display = 'block';
-
       document.getElementById('closeRulesModal').addEventListener('click', () => {
         modal.remove();
       });
-
       modal.addEventListener('click', (e) => {
         if (e.target === modal) {
           modal.remove();
         }
       });
     });
-
-    document.querySelector('.nav-link:nth-child(2)').addEventListener('click', (e) => {
+    document.getElementById('viewGameplay').addEventListener('click', (e) => {
       e.preventDefault();
       const gameplayContent = `
         <h1>🎮 Jogabilidade</h1>
-        <p>Descubra as teclas e interações disponíveis no Setor 7 RP:</p>
-        <ul>
-          <li><strong>F1:</strong> Menu radial para interagir com NPCs, veículos e objetos.</li>
-          <li><strong>Alt:</strong> Libera o mouse para interagir com menus automáticos.</li>
-          <li><strong>M:</strong> Acessa o telefone para chamadas e mensagens.</li>
-          <li><strong>Tab:</strong> Abre o inventário para gerenciar itens.</li>
-          <li><strong>L:</strong> Tranca ou destranca veículos.</li>
-        </ul>
-        <p>Explore o mundo e descubra novas interações ao se aproximar de NPCs e objetos!</p>
+        <p>Para jogar no Setor 7 RP, entre no servidor, crie seu personagem e confirme suas informações. O próprio jogo irá te guiar para o processo de whitelist e ativação do personagem através do Discord, de forma simples e automática.</p>
+        <p>Após a ativação, você já pode começar sua história e aproveitar todos os sistemas do servidor!</p>
       `;
       const modal = document.createElement('div');
       modal.className = 'modal-overlay';
@@ -609,19 +629,16 @@
       `;
       document.body.appendChild(modal);
       modal.style.display = 'block';
-
       document.getElementById('closeGameplayModal').addEventListener('click', () => {
         modal.remove();
       });
-
       modal.addEventListener('click', (e) => {
         if (e.target === modal) {
           modal.remove();
         }
       });
     });
-
-    document.querySelector('.nav-link:nth-child(3)').addEventListener('click', (e) => {
+    document.getElementById('viewHowToPlay').addEventListener('click', (e) => {
       e.preventDefault();
       const howToPlayContent = `
         <h1>📖 Como Jogar</h1>
@@ -646,17 +663,62 @@
       `;
       document.body.appendChild(modal);
       modal.style.display = 'block';
-
       document.getElementById('closeHowToPlayModal').addEventListener('click', () => {
         modal.remove();
       });
-
       modal.addEventListener('click', (e) => {
         if (e.target === modal) {
           modal.remove();
         }
       });
     });
+    function showFeature(type) {
+      let title = '';
+      let content = '';
+      if(type === 'ilegal') {
+        title = 'Ilegal';
+        content = `<p>No Setor 7 RP, o mundo ilegal é dinâmico e acessível. Roubos, fabricação de armas e itens, tráfico e ações clandestinas são possíveis com sistemas práticos e inovadores. Você e seu grupo podem dominar o submundo sem depender de admins, tudo é resolvido no RP.</p>`;
+      } else if(type === 'legal') {
+        title = 'Legal';
+        content = `<p>O universo legal é completo: empresas, lojas, empregos, propriedades e negócios podem ser conquistados e gerenciados por qualquer jogador. Tudo é feito dentro do RP, com sistemas leves e intuitivos.</p>`;
+      } else if(type === 'faccoes') {
+        title = 'Facções';
+        content = `<p>Facções podem ser fundadas e expandidas usando dinheiro do RP. Conquiste territórios, organize operações e dispute o poder com outros grupos. O domínio é de quem conquista, não de quem pede.</p>`;
+      } else if(type === 'sistemas') {
+        title = 'Sistemas';
+        content = `<p>Sistemas de roubos, fabricação, lojas, veículos, propriedades e facções são completos, leves e funcionais. Tudo foi criado para gerar muito RP e dar liberdade real ao jogador.</p>`;
+      } else if(type === 'loja') {
+        title = 'Loja';
+        content = `<p>Compre itens, armas, veículos e propriedades usando coins ou dinheiro do RP. A loja é acessível e prática, com tudo disponível para quem joga e conquista.</p>`;
+      } else if(type === 'veiculos') {
+        title = 'Veículos';
+        content = `<p>Carros de diferentes performances, caminhões e até helicópteros estão à venda nas concessionárias. Tudo pode ser comprado e usado dentro do RP, sem pay-to-win.</p>`;
+      } else if(type === 'inovacao') {
+        title = 'Inovação';
+        content = `<p>O Setor 7 RP traz sistemas únicos, eventos dinâmicos e liberdade total para criar sua história. Aqui, quem joga de verdade, faz a diferença.</p>`;
+      }
+      const modal = document.createElement('div');
+      modal.className = 'modal-overlay';
+      modal.innerHTML = `
+        <div class="modal">
+          <div class="modal-header">
+            <h2 class="modal-title">${title}</h2>
+            <button class="close-button" id="closeFeatureModal">×</button>
+          </div>
+          <div class="modal-content">${content}</div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      modal.style.display = 'block';
+      document.getElementById('closeFeatureModal').addEventListener('click', () => {
+        modal.remove();
+      });
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.remove();
+        }
+      });
+    }
   </script>
 </body>
 </html>
